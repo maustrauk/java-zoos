@@ -434,7 +434,7 @@ Expose the following Endpoint
 * [ ] GET /animals/count - that returns a JSON object list listing the animals and a count of how many zoos where they
   can be found. Use a custom query for this.
 * [*] GET /zoos/zoos - returns all zoos with their phone numbers and animals
-* [ ] GET /zoos/zoo/{id} - returns all information related to a zoo based on its id
+* [*] GET /zoos/zoo/{id} - returns all information related to a zoo based on its id
 
 ## Stretch goals
 
