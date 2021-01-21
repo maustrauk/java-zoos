@@ -427,7 +427,7 @@ Status OK
 * [*] Create the entities needed to store this data.
 * [*] A data.sql file has been provided with seed data. You can use this class directly or modify it to fit your models.
   However, the data found in the file is the seed data to use!
-* [ ] Add default Swagger Documentation
+* [*] Add default Swagger Documentation
 
 Expose the following Endpoint
 
