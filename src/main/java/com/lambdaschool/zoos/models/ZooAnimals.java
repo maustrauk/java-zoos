@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "zooanimals")
 @IdClass(ZooAnimalsId.class)
-public class ZooAnimals implements Serializable {
+public class ZooAnimals extends Auditable implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "zooid")
@@ -21,6 +21,8 @@ public class ZooAnimals implements Serializable {
     @JoinColumn(name = "animalid")
     @JsonIgnoreProperties(value = "zoos")
     private Animal animal;
+
+    private String incomingzoo;
 
     public ZooAnimals() {
     }
