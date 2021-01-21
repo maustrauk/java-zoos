@@ -16,7 +16,45 @@ public class Animal {
     @Column(nullable = false)
     private String animaltype;
 
-    @ManyToMany(mappedBy = "animals")
+    /*@ManyToMany(mappedBy = "animals")
     @JsonIgnoreProperties(value = "animals", allowSetters = true)
-    private Set<Zoo> zoos = new HashSet<>();
+    private Set<Zoo> zoos = new HashSet<>();*/
+
+    @OneToMany(mappedBy = "animal",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true)
+    @JsonIgnoreProperties(value = "zoo", allowSetters = true)
+    private Set<ZooAnimals> zoos = new HashSet<>();
+
+    public Animal() {
+    }
+
+    public Animal( String animaltype, Set<ZooAnimals> zoos) {
+        this.animaltype = animaltype;
+        this.zoos = zoos;
+    }
+
+    public long getAnimalid() {
+        return animalid;
+    }
+
+    public void setAnimalid(long animalid) {
+        this.animalid = animalid;
+    }
+
+    public String getAnimaltype() {
+        return animaltype;
+    }
+
+    public void setAnimaltype(String animaltype) {
+        this.animaltype = animaltype;
+    }
+
+    public Set<ZooAnimals> getZoos() {
+        return zoos;
+    }
+
+    public void setZoos(Set<ZooAnimals> zoos) {
+        this.zoos = zoos;
+    }
 }
