@@ -48,6 +48,14 @@ public class ZooAnimals extends Auditable implements Serializable {
         this.animal = animal;
     }
 
+    public String getIncomingzoo() {
+        return incomingzoo;
+    }
+
+    public void setIncomingzoo(String incomingzoo) {
+        this.incomingzoo = incomingzoo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
