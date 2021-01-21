@@ -31,4 +31,14 @@ public class ZoosServiceImpl implements ZoosService{
         return zoosrepos.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Zoo " + id +" Not found!"));
     }
+
+    @Transactional
+    @Override
+    public void delete(long id) {
+        if(zoosrepos.findById(id).isPresent()) {
+            zoosrepos.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("Zoo " + id + " not found!");
+        }
+    }
 }

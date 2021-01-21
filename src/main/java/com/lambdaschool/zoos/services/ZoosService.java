@@ -8,4 +8,6 @@ public interface ZoosService {
     List<Zoo> findAllZoos();
 
     Zoo findZooById(long id);
+
+    void delete(long id);
 }
