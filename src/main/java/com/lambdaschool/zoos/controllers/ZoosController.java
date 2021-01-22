@@ -55,4 +55,11 @@ public class ZoosController {
 
         return new ResponseEntity<>(newZoo, responseHeaders, HttpStatus.CREATED);
     }
+
+    @PutMapping(value ="/zoo/{id}", produces = "application/json", consumes = "application/json")
+    public ResponseEntity<?> updateFullZoo(@Valid @RequestBody Zoo updateZoo, @PathVariable long id) {
+        updateZoo.setZooid(id);
+        updateZoo = zoosService.save(updateZoo);
+        return new ResponseEntity<>(updateZoo, HttpStatus.OK);
+    }
 }
