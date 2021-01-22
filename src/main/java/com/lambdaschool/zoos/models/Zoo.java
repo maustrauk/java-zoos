@@ -15,8 +15,6 @@ public class Zoo extends Auditable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long  zooid;
 
-
-
     @Column(nullable = false, unique = true)
     private String zooname;
 

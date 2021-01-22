@@ -1,5 +1,6 @@
 package com.lambdaschool.zoos.services;
 
+import com.lambdaschool.zoos.models.Animal;
 import com.lambdaschool.zoos.models.Telephone;
 import com.lambdaschool.zoos.models.Zoo;
 import com.lambdaschool.zoos.models.ZooAnimal;
@@ -103,6 +104,58 @@ public class ZoosServiceImpl implements ZoosService{
 
 
         return zoosrepos.save(newZoo);
+    }
+
+    @Transactional
+    @Override
+    public Zoo update(Zoo updateZoo, long id) {
+        Zoo currentZoo = zoosrepos.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Zoo " + id + " not found!"));
+
+        if (updateZoo.getZooname() != null) {
+            currentZoo.setZooname(updateZoo.getZooname());
+        }
+
+        if(updateZoo.getTelephones().size() > 0) {
+            //currentZoo.getTelephones().clear();
+
+            for (Telephone t: updateZoo.getTelephones()) {
+                /*Telephone currentTelephone = phonesrepos.findById(t.getPhoneid())
+                        .orElseThrow(() -> new EntityNotFoundException("Telephone " + t.getPhoneid() +" not found!"));*/
+
+                Telephone currentTelephone = new Telephone();
+
+                if(t.getPhonetype() != null) {
+                    currentTelephone.setPhonetype(t.getPhonetype());
+                }
+
+                if(t.getPhonenumber() != null) {
+                    currentTelephone.setPhonenumber(t.getPhonenumber());
+                }
+
+                currentTelephone.setZoo(currentZoo);
+
+                currentZoo.getTelephones().add(currentTelephone);
+            }
+        }
+
+        if(updateZoo.getAnimals().size() > 0) {
+            currentZoo.getAnimals().clear();
+
+            for (ZooAnimal za: updateZoo.getAnimals()) {
+                Animal currentAnimal = animalsrepos.findById(za.getAnimal().getAnimalid())
+                        .orElseThrow(() -> new EntityNotFoundException("Animal " + za.getAnimal().getAnimalid() + " not found!"));
+                ZooAnimal newZooAnimal = new ZooAnimal( currentZoo, currentAnimal );
+
+                if(za.getIncomingzoo() != null) {
+                    newZooAnimal.setIncomingzoo(za.getIncomingzoo());
+                }
+
+                currentZoo.getAnimals().add(newZooAnimal);
+            }
+        }
+
+        return zoosrepos.save(currentZoo);
     }
 
 }

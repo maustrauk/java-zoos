@@ -62,4 +62,10 @@ public class ZoosController {
         updateZoo = zoosService.save(updateZoo);
         return new ResponseEntity<>(updateZoo, HttpStatus.OK);
     }
+
+    @PatchMapping(value ="/zoo/{id}", produces = "application/json", consumes = "application/json")
+    public ResponseEntity<?> updateZoo(@Valid @RequestBody Zoo updateZoo, @PathVariable long id) {
+        updateZoo = zoosService.update(updateZoo, id);
+        return new ResponseEntity<>(updateZoo, HttpStatus.OK);
+    }
 }
