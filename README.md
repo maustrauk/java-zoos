@@ -438,7 +438,7 @@ Expose the following Endpoint
 
 ## Stretch goals
 
-* [ ] POST /zoos/zoo - adds a zoo including new telephone number and zoo animal combinations. The Animal Type must
+* [*] POST /zoos/zoo - adds a zoo including new telephone number and zoo animal combinations. The Animal Type must
   already exist. * In the header return as the location of the newly created zoo POST /zoos/zoo/{id}
 * [ ] PUT /zoos/zoo/{id} - Completely replace the zoo record and all accompany records based off of the given zoo id.
 * [ ] PATCH /zoos/zoo/{id} - Updates the zoo with new information. Only the new data is to be sent from the frontend

@@ -3,10 +3,14 @@ package com.lambdaschool.zoos.controllers;
 import com.lambdaschool.zoos.models.Zoo;
 import com.lambdaschool.zoos.services.ZoosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -34,5 +38,21 @@ public class ZoosController {
     public ResponseEntity<?> deleteZooById(@PathVariable long id) {
         zoosService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/zoo", produces = "application/json", consumes = "application/json")
+    public ResponseEntity<?> addZoo(@Valid @RequestBody Zoo newZoo) {
+        newZoo.setZooid(0);
+        newZoo = zoosService.save(newZoo);
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+
+        URI newZooURI = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{zooid}")
+                .buildAndExpand(newZoo.getZooid())
+                .toUri();
+        responseHeaders.setLocation(newZooURI);
+
+        return new ResponseEntity<>(newZoo, responseHeaders, HttpStatus.CREATED);
     }
 }

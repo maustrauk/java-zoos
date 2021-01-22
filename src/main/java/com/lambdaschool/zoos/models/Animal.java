@@ -24,12 +24,12 @@ public class Animal extends Auditable{
     cascade = CascadeType.ALL,
     orphanRemoval = true)
     @JsonIgnoreProperties(value = "zoo", allowSetters = true)
-    private Set<ZooAnimals> zoos = new HashSet<>();
+    private Set<ZooAnimal> zoos = new HashSet<>();
 
     public Animal() {
     }
 
-    public Animal( String animaltype, Set<ZooAnimals> zoos) {
+    public Animal( String animaltype, Set<ZooAnimal> zoos) {
         this.animaltype = animaltype;
         this.zoos = zoos;
     }
@@ -50,11 +50,11 @@ public class Animal extends Auditable{
         this.animaltype = animaltype;
     }
 
-    public Set<ZooAnimals> getZoos() {
+    public Set<ZooAnimal> getZoos() {
         return zoos;
     }
 
-    public void setZoos(Set<ZooAnimals> zoos) {
+    public void setZoos(Set<ZooAnimal> zoos) {
         this.zoos = zoos;
     }
 }

@@ -10,4 +10,6 @@ public interface ZoosService {
     Zoo findZooById(long id);
 
     void delete(long id);
+
+    Zoo save(Zoo zoo);
 }
